@@ -1,0 +1,95 @@
+# RISC-V Microkernel
+
+A fully functional microkernel operating system implementation for RISC-V architecture, offering core OS components.
+
+## ⭐ Features
+
+### Memory Management
+- Custom memory allocator optimized for kernel-level operations
+- Efficient heap management for dynamic memory allocation
+
+### Process Management
+- Complete process lifecycle management
+- Process creation, termination, and state tracking
+- Support for multiple concurrent processes
+
+### Context Switching
+- Hardware-accelerated context switches using RISC-V capabilities
+- Efficient CPU time-sharing between processes
+- Minimal overhead during process transitions
+
+### Concurrency Control
+- Robust synchronization primitives
+- Multithreading support with thread-safe operations
+
+### Scheduler
+- Fair CPU time allocation
+- Standard process blocking and wake-up
+- Timer-based process suspension and resumption
+
+### Asynchronous I/O
+- Non-blocking console input operations
+- Buffered console output for improved performance
+- Interrupt-driven I/O handling
+
+## 🏗️ Architecture and APIs
+
+This project follows the microkernel design philosophy, keeping the kernel minimal while providing essential services. It is composed of different abstraction layers, each relying on the one beneath it, while offering an interface to the one above it:
+
+```
+┌─────────────────────────────────────┐
+│          User Applications          │
+├─────────────────────────────────────┤
+│              C++ API                │
+├─────────────────────────────────────┤
+│               C API                 │ 
+├─────────────────────────────────────┤
+│                ABI                  │ 
+├─────────────────────────────────────┤
+│           RISC-V Hardware           │
+└─────────────────────────────────────┘
+```
+- **C++ API**: Object-oriented interface for modern C++ applications
+- **C API**: Low-level C interface for maximum compatibility
+- **ABI**: Direct system call interface for performance-critical operations
+
+
+## 🛠️ Getting Started
+
+### Prerequisites
+- RISC-V toolchain (riscv64-unknown-elf-gcc or similar)
+- QEMU for RISC-V emulation
+- Make build system
+
+### Building and Running
+
+```bash
+# Build and run in QEMU emulator
+make qemu
+```
+
+The `make qemu` command will build the kernel, launch it in the QEMU emulator, and start user program containing tests. From console, user can choose a test to execute.
+
+### Running Your Own Program
+
+To run your own program instead of the tests:
+
+1. Open `main.cpp`
+2. Locate the `wrapper` function
+3. Replace the `userMain` with your own application code
+4. Rebuild and run with `make qemu`
+
+```cpp
+// In main.cpp
+void wrapper(void*) {  
+    // Your code here... 
+}
+```
+
+## ⚙️ Technical Details
+
+- **Target Architecture**: RISC-V
+- **Language**: C/C++ & Assembly
+- **Emulation Platform**: QEMU
+- **Concurrency Model**: Preemptive, time-shared
+- **I/O Model**: Asynchronous, interrupt-driven
