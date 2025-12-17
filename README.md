@@ -1,6 +1,6 @@
 # RISC-V Microkernel
 
-A fully functional microkernel operating system implementation for RISC-V architecture, offering core OS components.
+A fully functional microkernel implementation for RISC-V architecture built on xv6 foundation, offering core OS components.
 
 ## ⭐ Features
 
@@ -55,15 +55,17 @@ This project follows the microkernel design philosophy, keeping the kernel minim
 
 
 ## 🛠️ Getting Started
+This project requires a RISC-V cross-compiler and the QEMU emulator.
 
-### Prerequisites
-- RISC-V toolchain (riscv64-unknown-elf-gcc or similar)
-- QEMU for RISC-V emulation
-- Make build system
+### 1. Installing Toolchain
+- **Ubuntu:** `sudo apt install gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf qemu-system-misc`
+- **macOS:** `brew install riscv-gnu-toolchain qemu`
 
-### Building and Running
+### 2. Building and Running
 
 ```bash
+# Clean the project (optional)
+make clean
 # Build and run in QEMU emulator
 make qemu
 ```
