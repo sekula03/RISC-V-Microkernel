@@ -58,8 +58,30 @@ This project follows the microkernel design philosophy, keeping the kernel minim
 This project requires a RISC-V cross-compiler and the QEMU emulator.
 
 ### 1. Installing Toolchain
-- **Ubuntu:** `sudo apt install gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf qemu-system-misc`
-- **macOS:** `brew install riscv-gnu-toolchain qemu`
+- **Ubuntu:**  
+```bash
+# Update package list
+sudo apt update
+
+# Option 1: Bare-metal toolchain (Ubuntu 24.04+)
+sudo apt install gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf qemu-system-misc
+
+# Option 2: If unavailable (older Ubuntu versions)
+sudo apt install gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu qemu-system-misc
+```
+- **macOS:**  
+```bash
+brew tap riscv/riscv
+brew install riscv-tools qemu
+```
+Verify installation with:  
+```bash
+riscv64-unknown-elf-gcc --version
+qemu-system-riscv64 --version
+# OR
+riscv64-linux-gnu-gcc --version
+qemu-system-riscv64 --version
+```
 
 ### 2. Building and Running
 
